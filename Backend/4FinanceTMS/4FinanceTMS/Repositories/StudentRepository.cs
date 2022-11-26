@@ -46,6 +46,21 @@ namespace _4FinanceTMS.Repositories
             
 
         }
+
+        public async Task<Student> UpdateStudentAsync(Guid id, Student student)
+        {
+            var existingstudent = await _TMSDbContext.Students.FirstOrDefaultAsync(student => student.Id == id);
+            if (existingstudent == null)
+            {
+                return null;
+            }
+            existingstudent.Name=student.Name;
+            existingstudent.Email=student.Email;
+            existingstudent.Major=student.Major;    
+            await _TMSDbContext.SaveChangesAsync();
+            return existingstudent;
+            
+        }
     }
       
 }

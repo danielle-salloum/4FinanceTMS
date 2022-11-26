@@ -10,7 +10,6 @@ namespace _4FinanceTMS.Controllers
     public class StudentsController : ControllerBase
     {
         private readonly IStudentRepository studentRepository;
-        //constructor to inject the teacherRepository in the class
         public StudentsController(IStudentRepository studentRepository)
         {
             this.studentRepository = studentRepository;
@@ -19,16 +18,13 @@ namespace _4FinanceTMS.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllStudents()
         {
-            //get all teachers from database using repository
             var students = await studentRepository.GetAllAsync();
 
-            //declare a teacher dto list to return it to the user
             var studentsDto = new List<Dtos.StudentDto>();
 
-            //loop over the teachers model
             students.ToList().ForEach(student =>
             {
-                //create a teacher dto and fill it from the teacher model
+               
                 var studentDto = new Dtos.StudentDto()
                 {
                     StudentId = student.Id,
@@ -36,7 +32,6 @@ namespace _4FinanceTMS.Controllers
                     Email = student.Major,
                 };
 
-                //add each teacher dto to the teachersDto List
                 studentsDto.Add(studentDto);
             });
             return Ok(studentsDto);
@@ -46,13 +41,11 @@ namespace _4FinanceTMS.Controllers
         [ActionName("GetStudentAsync")]
         public async Task<IActionResult> GetStudentAsync(Guid id)
         {
-            //use the repository
             var student = await studentRepository.GetAsync(id);
             if (student == null)
             {
                 return NotFound();
             }
-            //mapping
             var studentDto = new Dtos.StudentDto()
             {
                 StudentId = student.Id,
@@ -96,6 +89,29 @@ namespace _4FinanceTMS.Controllers
             }
             var studentDto = new Dtos.StudentDto
             {
+                Name = student.Name,
+                Email = student.Email,
+                Major = student.Major,
+            };
+            return Ok(studentDto);
+        }
+        [HttpPut("{id:guid}")]
+        public async Task<IActionResult> UpdateStudentAsync([FromRoute] Guid id, [FromBody] UpdateStudentInputModel updateStudentInputModel)
+        {
+            var student = new Models.Student()
+            {
+                Name = updateStudentInputModel.Name,
+                Major = updateStudentInputModel.Major,
+            };
+            student = await studentRepository.UpdateStudentAsync(id, student);
+
+            if (student == null)
+            {
+                return NotFound();
+            }
+            var studentDto = new Dtos.StudentDto
+            {
+                StudentId = student.Id,
                 Name = student.Name,
                 Email = student.Email,
                 Major = student.Major,

@@ -8,5 +8,6 @@ namespace _4FinanceTMS.Repositories
         Task<Student> GetAsync(Guid id);
         Task<Student> CreateStudentAsync(Student student);
         Task<Student> DeleteStudentAsync(Guid id);
+        Task<Student> UpdateStudentAsync(Guid id, Student student);
     }
 }

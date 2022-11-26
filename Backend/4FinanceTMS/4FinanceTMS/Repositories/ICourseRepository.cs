@@ -8,5 +8,6 @@ namespace _4FinanceTMS.Repositories
         Task<Course> GetAsync(Guid id);
         Task<Course> CreateCourseAsync(Course course);
         Task<Course> DeleteCourseAsync(Guid id);
+        Task<Course> UpdateCourseAsync(Guid id, Course course);
     }
 }

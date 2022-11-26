@@ -103,5 +103,31 @@ namespace _4FinanceTMS.Controllers
             };
             return Ok(courseDto);
         }
+        [HttpPut("{id:guid}")]
+        public async Task<IActionResult> UpdateCourseAsync([FromRoute] Guid id, [FromBody] UpdateCourseInputModel updateCourseInputModel)
+        {
+            
+            var course = new Models.Course()
+            {
+                Name = updateCourseInputModel.Name,
+                CreditNumber = updateCourseInputModel.CreditNumber,
+                Description= updateCourseInputModel.Description,    
+            };
+            course = await courseRepository.UpdateCourseAsync(id, course);
+            //if null return not found
+            if (course == null)
+            {
+                return NotFound();
+            }
+            //comvert from model back to DTB
+            var courseDto = new Dtos.CourseDto
+            {
+                CourseId=course.Id,
+                CreditNumber=course.CreditNumber,
+                Name=course.Name,
+                Description=course.Description,
+            };
+            return Ok(courseDto);
+        }
     }
 }

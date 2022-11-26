@@ -1,0 +1,56 @@
+.home-page-container {
+  padding: 0 20px;
+}
+.home-page-content {
+  padding: 0 10%;
+}
+.top-section-image {
+  width: 100%;
+}
+.home-page-titles {
+  font-size: 40px;
+  text-align: center;
+  color: #ef7367;
+}
+.home-page-contact-us {
+  display: flex;
+  justify-content: space-around;
+  color: #ef7367;
+}
+.about-us-section-text {
+  font-size: 22px;
+}
+.top-section-text {
+  font-size: 50px;
+  color: whitesmoke;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.courses-list {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+.social-media-logo {
+  margin: 10px;
+  width: 60px;
+}
+.social-media {
+  display: flex;
+  flex-direction: column;
+}
+.phone-email-section {
+  display: flex;
+  flex-direction: column;
+}
+.course-name {
+  font-size: 60px;
+  text-align: center;
+  color: #ef7367;
+}
+a {
+  color: #ef7367;
+  text-decoration: none;
+}
